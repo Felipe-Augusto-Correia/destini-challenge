@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-//TODO: Step 15 - Run the app and see if you can see the screen update with the first story. Delete this TODO if it looks as you expected.
+import 'story_brain.dart';
 
 void main() => runApp(Destini());
 
@@ -13,18 +12,23 @@ class Destini extends StatelessWidget {
   }
 }
 
-//TODO: Step 9 - Create a new storyBrain object from the StoryBrain class.
-
 class StoryPage extends StatefulWidget {
   _StoryPageState createState() => _StoryPageState();
 }
 
 class _StoryPageState extends State<StoryPage> {
+  StoryBrain strb = new StoryBrain();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //TODO: Step 1 - Add background.png to this Container as a background image.
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage('images/background.png'),
+          ),
+        ),
         padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
         constraints: BoxConstraints.expand(),
         child: SafeArea(
@@ -35,8 +39,7 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 12,
                 child: Center(
                   child: Text(
-                    //TODO: Step 10 - use the storyBrain to get the first story title and display it in this Text Widget.
-                    'Story text will go here.',
+                    strb.getStory(0),
                     style: TextStyle(
                       fontSize: 25.0,
                     ),
@@ -52,8 +55,7 @@ class _StoryPageState extends State<StoryPage> {
                   },
                   color: Colors.red,
                   child: Text(
-                    //TODO: Step 13 - Use the storyBrain to get the text for choice 1.
-                    'Choice 1',
+                    strb.getChoice1(0),
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
@@ -74,8 +76,7 @@ class _StoryPageState extends State<StoryPage> {
                   },
                   color: Colors.blue,
                   child: Text(
-                    //TODO: Step 14 - Use the storyBrain to get the text for choice 2.
-                    'Choice 2',
+                    strb.getChoice2(0),
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
