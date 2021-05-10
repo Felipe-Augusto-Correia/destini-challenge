@@ -1,6 +1,8 @@
 import "story.dart";
 
 class StoryBrain {
+  int storyNumber = 0;
+
   List<Story> _storyData = [
     Story(
         storyTitle:
@@ -33,24 +35,53 @@ class StoryBrain {
         choice2: '')
   ];
 
-  String getStory(int storyNumber) {
+  String getStory() {
     return _storyData[storyNumber].storyTitle;
   }
 
-  String getChoice1(int storyNumber) {
+  String getChoice1() {
     return _storyData[storyNumber].choice1;
   }
 
-  String getChoice2(int storyNumber) {
+  String getChoice2() {
     return _storyData[storyNumber].choice2;
+  }
+
+  void nextStory(int choiceNumber) {
+    int userChoice = choiceNumber;
+    if (storyNumber == 0 && userChoice == 1) {
+      storyNumber = 2;
+    } else if (storyNumber == 0 && userChoice == 2) {
+      storyNumber = 1;
+    } else if (storyNumber == 2 && userChoice == 1) {
+      storyNumber = 5;
+    } else if (storyNumber == 2 && userChoice == 2) {
+      storyNumber = 4;
+    } else if (storyNumber == 1 && userChoice == 1) {
+      storyNumber = 2;
+    } else if (storyNumber == 1 && userChoice == 2) {
+      storyNumber = 3;
+    } else if (storyNumber == 3 || storyNumber == 4 || storyNumber == 5) {
+      restart();
+    }
+  }
+
+  void restart() {
+    storyNumber = 0;
+  }
+
+  bool buttonShouldBeVisible() {
+    if (storyNumber == 0 || storyNumber == 1 || storyNumber == 2) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
 //TODO: Step 23 - Use the storyNumber property inside getStory(), getChoice1() and getChoice2() so that it gets the updated story and choices rather than always just the first (0th) one.
 
 //TODO: Step 25 - Change the storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
-
-//TODO: Step 16 - Create a property called storyNumber which starts with a value of 0. This will be used to track which story the user is currently viewing.
 
 //TODO: Step 17 - Create a method called nextStory(), it should not have any outputs but it should have 1 input called choiceNumber which will be the choice number (int) made by the user.
 
